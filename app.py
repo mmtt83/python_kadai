@@ -13,11 +13,11 @@ def index():
 
 @app.route("/api/recommend_article")
 def api_recommend_article():
-    """はてブのホットエントリーから記事を入手して、ランダムに1件返却します."""
-    with urlopen("http://feeds.feedburner.com/hatena/b/hotentry") as res:
+    """NHKニュース 速報・最新情報から記事を入手して、ランダムに1件返却します."""
+    with urlopen("https://www3.nhk.or.jp/news/") as res:
         html = res.read().decode("utf-8")
     soup = BeautifulSoup(html, "html.parser")
-    items = soup.select("item")
+    items = soup.select(".content--header-title h1")
     shuffle(items)
     item = items[0]
     print(item)
